@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  searchdb:
+    image: mongo
+
+  search.api:
+    image: ${DOCKER_REGISTRY-}searchapi
+    build:
+      context: .
+      dockerfile: src/Search/Search.API/Dockerfile

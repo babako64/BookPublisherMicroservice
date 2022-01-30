@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  searchdb:
+    container_name: searchdb
+    restart: always
+    volumes:
+     - ${WEBAPP_STORAGE_HOME}/site:/data/db 
+    ports:
+     - "27017:27017"
+
+  search.api:
+    container_name: searchapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "SearchDatabaseSetting:ConnectionString=mongodb://searchdb:27017"
+    depends_on:
+      - searchdb
+    volumes:
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/
+    ports:
+      - "8000:80"
