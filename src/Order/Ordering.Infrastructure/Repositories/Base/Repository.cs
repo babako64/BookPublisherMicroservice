@@ -84,4 +84,3 @@ namespace Ordering.Infrastructure.Repositories.Base
         }
     }
 }
-}
